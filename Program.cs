@@ -64,33 +64,6 @@ namespace calculator_v1
                 return false;
             }
         }
-        /*method check operator priority in array operators array, where operators priority be at the same 
-         *time index array. operators are arranged in an array in growing order.
-         *Method CheckPriorityOperator is used in*/
-        /* 
-         private byte CheckPriorityOperator(string[] signArray, char sign) 
-         {
-             for (byte _i = 0; _i<= signArray.Length; _i++ )
-             {
-                 string stringToSignArray = signArray[_i];
-                 if (SignBelongs(stringToSignArray, sign)) 
-                 {
-                     return _i;
-                 }
-                 if (SignBelongs(stringToSignArray, sign))  
-                 {
-                     return _i;
-                 }
-                 if (SignBelongs(stringToSignArray, sign)) 
-                 {
-                     return _i;
-                 }
-             }
-             return 100;
-         }
-        */
-        /*Method for checking prioritet between two operator, method uses to decidet that operator 
-         *downloaded from expression has high/lower prioroty than operator on stack*/
         private bool CheckPrioryty(string[] array_operator, char char_expression)
         {
             if (_operator_stack.Count == 0)
@@ -162,26 +135,26 @@ namespace calculator_v1
                     {
                        // while (CheckPrioryty(_array_operators, _ch_expression[_n]))
                         //{
-                            if (!(_operator_stack.Count == 0))
+                        if (!(_operator_stack.Count == 0))
+                        {
+                            if (_operator_stack.Peek().ToString() == "(")
                             {
-                                if (_operator_stack.Peek().ToString() == "(")
-                                {
-                                    _operator_stack.Pop();
-                                }
-                                else
-                                {
-                                do
-                                {
-                                  if (CheckPrioryty(_array_operators, _ch_expression[_n]))
-                                    {
-     
+                                _operator_stack.Pop();
+                             } 
+                             else
+                             {
+                                 do
+                                 {
+                                     if (CheckPrioryty(_array_operators, _ch_expression[_n]))
+                                     {
                                         _operator_stack.Push(_ch_expression[_n]);
-                                    }
-                                    else
-                                    {
-                                        _num_queue.Enqueue(_operator_stack.Pop());
-                                    }
-                                } while (CheckPrioryty(_array_operators, _ch_expression[_n]) && !(_operator_stack.Count == 0));
+                                     }
+                                     else
+                                     {
+                                         _num_queue.Enqueue(_operator_stack.Pop());
+                                         break;
+                                     }
+                                 } while (CheckPrioryty(_array_operators, _ch_expression[_n]) && !(_operator_stack.Count == 0));
                                 }
                             }
                        // }
